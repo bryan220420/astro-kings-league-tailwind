@@ -1,0 +1,40 @@
+---
+import Layout from "@layouts/Layout.astro";
+
+interface Team {
+  id: string;
+  name: number;
+  image: string;
+  presidentId: number;
+  channel: string;
+  socialNetworks: string[];
+}
+
+const res = await fetch(
+  "https://kings-league-api.bryan-armando.workers.dev/teams"
+);
+const teams = await res.json();
+---
+
+<Layout title="Kings League InfoJob">
+  <div class="container mx-auto">
+    <header class="flex gap-4">
+      {
+        teams.map(({ id, name, image }: Team) => (
+          <a href={`/team/${id}`}>
+            <img src={image} class="w-10 " alt={`Escudo del equipo ${name}`} />
+          </a>
+        ))
+      }
+      <nav>
+        <ul>
+          <li><a href="/equipos">Equipos</a></li>
+          <li><a href="/calendario">Calendario</a></li>
+          <li><a href="/estadisticas">Estadisticas</a></li>
+          <li><a href="/contacto">Contacto</a></li>
+          <li><a href="/reglamento">Reglamento</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+</Layout>
