@@ -1,7 +1,23 @@
 ---
+import Container from "@components/Container.astro";
+import Table from "@components/Table.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout title="Kings League InfoJob">
-  <div class="container mx-auto"></div>
+  <main>
+    <section class="bg-[#e8521e] p-10">
+      <!-- schedule - leaderboard -->
+      <Container>
+        <Table />
+      </Container>
+      <!-- mvp - goles - assits -->
+      <div class="col-span-1 lg:col-span-2 lg:grid-cols-2">
+        <div class="bg-red-300">a</div>
+        <div class="bg-blue-300">e</div>
+        <div class="bg-black">y</div>
+      </div>
+    </section>
+  </main>
+  <button>Apuntate a la kings</button>
 </Layout>
