@@ -1,0 +1,56 @@
+---
+import Logo from "./Logo.astro";
+
+interface Team {
+  id: string;
+  name: number;
+  image: string;
+  presidentId: number;
+  channel: string;
+  socialNetworks: string[];
+}
+
+const res = await fetch(
+  "https://kings-league-api.bryan-armando.workers.dev/teams"
+);
+const teams = await res.json();
+---
+
+<header
+  class="relative flex items-center gap-x-8 bg-gradient-to-l from-[#e8521e] via-[#f7ab35] to-[#f7ab35] p-4"
+>
+  <Logo />
+  <div class="flex flex-col gap-5">
+    <nav>
+      <ul class="flex gap-3 rounded-full bg-white/20 px-4 py-2">
+        {
+          teams.map(({ id, name, image }: Team) => (
+            <li>
+              <a
+                href={`/team/${id}`}
+                class=" block transition-all hover:scale-125"
+              >
+                <img
+                  src={image}
+                  class="w-8 drop-shadow-[0px_0px_3px_#111]"
+                  alt={`Escudo del equipo ${name}`}
+                />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <nav>
+      <ul
+        class="flex justify-center gap-6 text-sm text-white [&>li>a:hover]:underline [&>li>a:hover]:opacity-100 [&>li>a]:opacity-80"
+      >
+        <li><a href="/equipos">Equipos</a></li>
+        <li><a href="/calendario">Calendario</a></li>
+        <li><a href="/estadisticas">Estadisticas</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+        <li><a href="/reglamento">Reglamento</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
