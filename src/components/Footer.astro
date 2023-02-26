@@ -1,0 +1,75 @@
+---
+import instagram from "@images/logos/social/instagram.svg";
+import tiktok from "@images/logos/social/tiktok.svg";
+import twitch from "@images/logos/social/twitch.svg";
+import twitter from "@images/logos/social/twitter.svg";
+import youtube from "@images/logos/social/youtube.svg";
+
+const socialMedia = [
+  {
+    image: instagram,
+    url: "https://instagram.com/kingsleague",
+  },
+  {
+    image: tiktok,
+    url: "https://www.tiktok.com/@kingsleague",
+  },
+  {
+    image: twitch,
+    url: "https://www.twitch.tv/kingsleague",
+  },
+  {
+    image: twitter,
+    url: "https://twitter.com/kingsleague",
+  },
+  {
+    image: youtube,
+    url: "https://www.youtube.com/@KingsLeagueOfficial",
+  },
+];
+---
+
+<footer
+  class="flex flex-col items-center justify-between bg-[#e8521e] p-4 md:flex-row md:p-8"
+>
+  <section class="flex flex-col items-center gap-6">
+    <!-- class="max-w-xs" for image -->
+    <img
+      src="/logos/kings-league-infojobs.svg"
+      alt="Logo Kings League InforJobs"
+      class="max-w-xs"
+    />
+    <nav>
+      <ul class="flex items-center gap-4">
+        {
+          socialMedia.map(({ image, url }) => (
+            <a href={url}>
+              <img src={image} alt="Instagram Logo" class="w-7" />
+            </a>
+          ))
+        }
+      </ul>
+    </nav>
+  </section>
+  <section class="grid justify-center gap-4 py-4 text-sm">
+    <nav>
+      <ul class="grid grid-cols-3 place-items-center">
+        <li class="py-2"><a href="/equipos">Equipos</a></li>
+        <li class="py-2"><a href="/equipos">Equipos</a></li>
+        <li class="py-2"><a href="/equipos">Equipos</a></li>
+        <li class="py-2"><a href="/equipos">Equipos</a></li>
+        <li class="py-2"><a href="/equipos">Equipos</a></li>
+        <li class="py-2"><a href="/equipos">Equipos</a></li>
+        <li class="py-2"><a href="/equipos">Equipos</a></li>
+      </ul>
+    </nav>
+    <nav>
+      <ul class="flex gap-4">
+        <li><a href="">Contacto</a></li>
+        <li><a href="">Politica de Privacidad</a></li>
+        <li><a href="">Aviso Legal</a></li>
+        <li><a href="">Politica de Cookies</a></li>
+      </ul>
+    </nav>
+  </section>
+</footer>
