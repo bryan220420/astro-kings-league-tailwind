@@ -1,7 +1,42 @@
 ---
+import TeamsSelectorCards from "@components/TeamsSelectorCards.astro";
 import Layout from "@layouts/Layout.astro";
+import { getAllTeams } from "@services/getAllTeams";
+
+export async function getStaticPaths() {
+  const teams = await getAllTeams();
+  return teams.map((team) => ({
+    params: { teamId: team.id },
+    props: { ...team },
+  }));
+}
+
+const {
+  name: teamName,
+  image,
+  presidentId,
+  coachInfo: { name: coachName },
+  channel,
+  players,
+} = Astro.props;
 ---
 
-<Layout title="team :V">
-  <h1>Team :v</h1>
+<Layout title={teamName}>
+  <div class="container mx-auto py-6">
+    <section>
+      <div>
+        <img src={image} alt="" class="w-12" />
+        {teamName}
+      </div>
+      <a href={channel}> Redes</a>
+    </section>
+    <section>
+      <ul>
+        <li><b>Presidente :</b> {presidentId}</li>
+        <li><b>Entrenador :</b>{coachName}</li>
+        <li><b>Players :</b>{players.length}</li>
+      </ul>
+    </section>
+    <TeamsSelectorCards />
+  </div>
 </Layout>
