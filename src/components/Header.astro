@@ -39,48 +39,54 @@ const res = await fetch(
 const teams = await res.json();
 ---
 
-<header
-  class="flex items-center gap-x-6 bg-gradient-to-l from-[#e8521e] via-[#f7ab35] to-[#f7ab35] p-4"
->
-  <Logo />
-  <div class="flex flex-col gap-2">
-    <nav>
-      <ul class="flex gap-3 rounded-full bg-white/20 px-4 py-2">
-        {
-          teams.map(({ id, name, image }: Team) => (
-            <li>
+<header class="flex flex-col gap-2 bg-[#e8521e] p-4">
+  <nav class="relative">
+    <ul class="flex items-center justify-center gap-3 rounded-full px-4 py-2">
+      {
+        teams.map(({ id, name, image }: Team, i: Number) => (
+          <>
+            {i === 6 && (
+              <li class="z-10">
+                <Logo />
+              </li>
+            )}
+            <li class="z-10">
               <a
                 href={`/team/${id}`}
                 class=" block transition-all hover:scale-125"
               >
                 <img
                   src={image}
-                  class="h-8 w-8 drop-shadow-[0px_0px_3px_#111]"
+                  class="h-10 w-10 drop-shadow-[0px_0px_3px_#bbb]"
                   alt={`Escudo del equipo ${name}`}
                 />
               </a>
             </li>
-          ))
-        }
-      </ul>
-    </nav>
-    <nav>
-      <ul
-        class="flex justify-center gap-6 text-sm text-white [&>li>a:hover]:underline [&>li>a:hover]:opacity-100 [&>li>a]:opacity-80"
-      >
-        {
-          routes.map(({ name, url }) => (
-            <li>
-              <a
-                href={url}
-                class={`${Astro.url.pathname === url && "underline"} `}
-              >
-                {name}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-  </div>
+          </>
+        ))
+      }
+    </ul>
+    <div
+      class="absolute top-1/2 left-0 h-[70%] w-full -translate-y-1/2 rounded-full border-2 border-[#f7ab35] bg-black"
+    >
+    </div>
+  </nav>
+  <nav>
+    <ul
+      class="flex justify-center gap-6 text-sm text-white [&>li>a:hover]:underline [&>li>a:hover]:opacity-100 [&>li>a]:opacity-80"
+    >
+      {
+        routes.map(({ name, url }) => (
+          <li>
+            <a
+              href={url}
+              class={`${Astro.url.pathname === url && "underline"} `}
+            >
+              {name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
 </header>

@@ -2,13 +2,11 @@
 const leaderboard = await fetch(
   "https://kings-league-api.bryan-armando.workers.dev/leaderboard"
 ).then((res) => res.json());
-
-console.log(leaderboard);
 ---
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
   <table class="w-full text-left text-xs text-black">
-    <thead class="font-title bg-black uppercase text-white">
+    <thead class="bg-black font-title uppercase text-white">
       <tr>
         <th scope="col" class="px-6 py-3"> POS</th>
         <th scope="col" class="px-6 py-3"> EQUIPO</th>
