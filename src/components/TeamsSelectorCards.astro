@@ -1,0 +1,47 @@
+---
+import { getAllTeams } from "@services/getAllTeams";
+const teams = await getAllTeams();
+
+const backgroundColor = {
+  "aniquiladores-fc": "bg-aniquiladores-fc",
+  "1k": "bg-1k",
+  "el-barrio": "bg-el-barrio",
+  "jijantes-fc": "bg-jijantes-fc",
+  kunisports: "bg-kunisports",
+  "los-troncos-fc": "bg-los-troncos-fc",
+  "pio-fc": "bg-pio-fc",
+  "porcinos-fc": "bg-porcinos-fc",
+  "rayo-barcelona": "bg-rayo-barcelona",
+  "saiyans-fc": "bg-saiyans-fc",
+  "ultimate-mostoles": "bg-ultimate-mostoles",
+  "xbuyer-team": "bg-xbuyer-team",
+};
+---
+
+<section class="grid gap-6 px-3 py-8 sm:grid-cols-2 md:px-6 lg:grid-cols-3">
+  {
+    teams.map(({ id, name, imageReverse }) => (
+      <article class="overflow-hidden rounded-lg ">
+        <a
+          href={`/team/${id}`}
+          class={`group relative flex h-40 items-center gap-8 ${backgroundColor[id]} p-8 `}
+          title={`Ver el equipo ${name}`}
+        >
+          <figure
+            class={`absolute inset-0 z-10  bg-[size:90%] bg-center bg-no-repeat opacity-10 `}
+            style={`background-image: url(${imageReverse})`}
+          />
+
+          <img
+            src={imageReverse}
+            alt={`Logo del team ${name}`}
+            class=" w-16 transition duration-200 group-hover:scale-[1.2]"
+          />
+          <h3 class="font-title  text-lg text-white transition duration-200 group-hover:scale-[1.2]">
+            {name}
+          </h3>
+        </a>
+      </article>
+    ))
+  }
+</section>
