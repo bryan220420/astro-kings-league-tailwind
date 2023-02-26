@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         body: ["Archivo", "system-ui"],
-        black: ["Archivo Black", "sans-serif"],
+        title: ["Archivo Black", "sans-serif"],
       },
     },
   },
