@@ -3,9 +3,13 @@ import Header from "@components/Header.astro";
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title = "Home page" } = Astro.props as Props;
+const {
+  title = "Kings League webPage",
+  description = "Bienvenidos  a la Kings League",
+} = Astro.props as Props;
 ---
 
 <!DOCTYPE html>
@@ -13,11 +17,13 @@ const { title = "Home page" } = Astro.props as Props;
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
     <link rel="shortcut icon" href="favicon.svg" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
   </head>
-  <body>
+  <body class="min-h-screen bg-orange-50">
     <Header />
     <slot />
   </body>
