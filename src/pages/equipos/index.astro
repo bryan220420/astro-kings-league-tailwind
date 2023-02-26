@@ -1,40 +1,15 @@
 ---
 import Container from "@components/Container.astro";
 import SectionTitle from "@components/SectionTitle.astro";
+import TeamsSelectorCards from "@components/TeamsSelectorCards.astro";
 import Layout from "@layouts/Layout.astro";
-import { getAllTeams } from "@services/getAllTeams";
-const teams = await getAllTeams();
 ---
 
 <Layout title="Equipos">
   <SectionTitle title="Equipos" />
   <Container>
-    <div class="-mt-5 rounded-lg bg-white shadow-md">
-      <section
-        class="grid gap-6 px-3 py-8 sm:grid-cols-2 md:px-6 lg:grid-cols-3"
-      >
-        {
-          teams.map(({ id, name, image }) => (
-            <article class="overflow-hidden rounded-lg">
-              <a
-                href={`/team/${id}`}
-                class="group relative flex items-center justify-center py-5"
-              >
-                <figure class="absolute left-0 h-full w-full bg-blue-500 bg-[url('https://kings-league-api.bryan-armando.workers.dev/static/logos/1k.svg')] bg-cover bg-[position:center] opacity-90 transition-all" />
-
-                <img
-                  src={image}
-                  alt=""
-                  class="h-28 w-28 brightness-[100] transition group-hover:scale-105"
-                />
-                <h3 class="font-title z-10 text-2xl text-white transition group-hover:scale-105">
-                  1k FC
-                </h3>
-              </a>
-            </article>
-          ))
-        }
-      </section>
+    <div class="-mt-5 mb-8 rounded-lg bg-white shadow-md">
+      <TeamsSelectorCards />
     </div>
   </Container>
 </Layout>
