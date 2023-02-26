@@ -10,6 +10,29 @@ interface Team {
   socialNetworks: string[];
 }
 
+const routes = [
+  {
+    name: "Equipos",
+    url: "/equipos",
+  },
+  {
+    name: "Calendario",
+    url: "/calendario",
+  },
+  {
+    name: "Estadisticas",
+    url: "/estadisticas",
+  },
+  {
+    name: "Contacto",
+    url: "/contacto",
+  },
+  {
+    name: "Reglamento",
+    url: "/reglamento",
+  },
+];
+
 const res = await fetch(
   "https://kings-league-api.bryan-armando.workers.dev/teams"
 );
@@ -17,7 +40,7 @@ const teams = await res.json();
 ---
 
 <header
-  class="relative flex items-center gap-x-6 bg-gradient-to-l from-[#e8521e] via-[#f7ab35] to-[#f7ab35] p-4"
+  class="flex items-center gap-x-6 bg-gradient-to-l from-[#e8521e] via-[#f7ab35] to-[#f7ab35] p-4"
 >
   <Logo />
   <div class="flex flex-col gap-2">
@@ -45,11 +68,18 @@ const teams = await res.json();
       <ul
         class="flex justify-center gap-6 text-sm text-white [&>li>a:hover]:underline [&>li>a:hover]:opacity-100 [&>li>a]:opacity-80"
       >
-        <li><a href="/equipos">Equipos</a></li>
-        <li><a href="/calendario">Calendario</a></li>
-        <li><a href="/estadisticas">Estadisticas</a></li>
-        <li><a href="/contacto">Contacto</a></li>
-        <li><a href="/reglamento">Reglamento</a></li>
+        {
+          routes.map(({ name, url }) => (
+            <li>
+              <a
+                href={url}
+                class={`${Astro.url.pathname === url && "underline"} `}
+              >
+                {name}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
   </div>
