@@ -4,24 +4,24 @@ const leaderboard = await fetch(
 ).then((res) => res.json());
 ---
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+<div class="relative overflow-x-auto rounded-lg shadow-md">
   <table class="w-full text-left text-xs text-black">
     <thead class="bg-black font-title uppercase text-white">
       <tr>
-        <th scope="col" class="px-6 py-3"> POS</th>
-        <th scope="col" class="px-6 py-3"> EQUIPO</th>
-        <th scope="col" class="px-6 py-3"> PG</th>
-        <th scope="col" class="px-6 py-3"> PP</th>
+        <th scope="col" class="px-4 py-1"> POS</th>
+        <th scope="col" class="px-4 py-1"> EQUIPO</th>
+        <th scope="col" class="px-4 py-1"> PG</th>
+        <th scope="col" class="px-4 py-1"> PP</th>
       </tr>
     </thead>
     <tbody>
       {
         leaderboard.map(({ wins, loses, team: { image, name, id } }, i) => (
           <tr class="border-b bg-white">
-            <th scope="row" class="font-title whitespace-nowrap px-6 py-4">
+            <th scope="row" class="font-title whitespace-nowrap px-4  py-1">
               {i + 1}
             </th>
-            <td class="px-6 py-4">
+            <td class="px-4  py-1">
               <a
                 href={`/team/${id}`}
                 class="flex items-center gap-4 transition hover:scale-105"
@@ -29,8 +29,8 @@ const leaderboard = await fetch(
                 <img src={image} alt={name} class="h-10 w-10" /> {name}
               </a>
             </td>
-            <td class="px-6 py-4"> {wins}</td>
-            <td class="px-6 py-4"> {loses}</td>
+            <td class="px-4  py-1"> {wins}</td>
+            <td class="px-4  py-1"> {loses}</td>
           </tr>
         ))
       }
