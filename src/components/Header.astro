@@ -80,7 +80,9 @@ const teams = await res.json();
           <li>
             <a
               href={url}
-              class={`${Astro.url.pathname === url && "underline"} `}
+              class={`${
+                Astro.url.pathname === url && "pointer-events-none underline"
+              } `}
             >
               {name}
             </a>
