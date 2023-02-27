@@ -24,33 +24,58 @@ const {
 ---
 
 <Layout title={teamName}>
-  <section class={`${backgroundColor[id]} text-white relative h-96`}>
+  <section class={`${backgroundColor[id]} relative z-10 p-20`}>
     <figure
-      class={`absolute inset-0 z-10 bg-[size:90%] bg-center bg-no-repeat opacity-10 `}
+      class={`absolute inset-0 -z-10 bg-[size:80%] bg-center bg-no-repeat opacity-10 `}
       style={`background-image: url(${imageReverse})`}
     >
     </figure>
     <Container>
-      <section class="flex items-center justify-around">
-        <div class="flex items-center gap-6">
-          <img src={imageReverse} alt="" class="w-12" />
-          {teamName}
+      <section class="flex items-center justify-between">
+        <div class="flex items-center gap-x-10">
+          <img src={imageReverse} alt="" class="h-36" />
+          <h1 class="font-title text-6xl text-white">{teamName}</h1>
         </div>
         <a href={channel}> Redes</a>
       </section>
-      <section>
+      <section class="my-20">
         <ul>
           <li><b>Presidente :</b> {presidentId}</li>
           <li><b>Entrenador :</b>{coachName}</li>
-          <li><b>Players :</b>{players.length}</li>
         </ul>
       </section>
       <section>
-        <ul>
-          {players.map(({ fullName }) => <li>{fullName}</li>)}
-        </ul>
+        <h2 class="my-10 text-center font-title text-3xl text-white">
+          Jugadores
+        </h2>
+        <div
+          class="grid gap-4 font-body sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        >
+          {
+            players.map(({ fullName, role, image }) => (
+              <article class="font-title p-5 text-center">
+                <img
+                  src={`https://kings-league-api.bryan-armando.workers.dev/static/players/${image}`}
+                  alt={`Jugador ${fullName}`}
+                  class="aspect[170/240] mx-auto w-40"
+                  title={fullName}
+                />
+                <h3 class="font-title text-xl text-white ">{fullName}</h3>
+                <h4 class="font-body inline-block rounded-full bg-black px-4 py-1 font-semibold uppercase text-orange-300">
+                  {role}
+                </h4>
+              </article>
+            ))
+          }
+        </div>
       </section>
     </Container>
   </section>
-  <TeamsSelectorCards />
+
+  <section>
+    <Container>
+      <h1 class="my-6 text-center font-title text-3xl">Equipos</h1>
+      <TeamsSelectorCards />
+    </Container>
+  </section>
 </Layout>
