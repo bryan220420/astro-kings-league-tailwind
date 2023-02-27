@@ -8,7 +8,7 @@
       "@layouts/*" : ["src/layouts/*"],
       "@types/*" : ["src/types/*"],
       "@services/*" : ["src/services/*"],
-      "@images/*" : ["public/*"],
+      "@images/*" : ["/*"],
     }
   }
 }

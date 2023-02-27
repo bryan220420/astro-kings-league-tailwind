@@ -30,7 +30,7 @@ const socialMedia = [
 ---
 
 <footer
-  class="flex flex-col items-center justify-between bg-[#e8521e] p-4 md:flex-row md:p-8"
+  class="flex flex-col items-center justify-between bg-black p-4 text-white md:flex-row md:p-8"
 >
   <section class="flex flex-col items-center gap-6">
     <!-- class="max-w-xs" for image -->
@@ -43,9 +43,18 @@ const socialMedia = [
       <ul class="flex items-center gap-4">
         {
           socialMedia.map(({ image, url }) => (
-            <a href={url}>
-              <img src={image} alt="Instagram Logo" class="w-7" />
-            </a>
+            <li>
+              <a
+                href={url}
+                class="group grid h-10 w-10 place-items-center rounded-full bg-white p-2"
+              >
+                <img
+                  src={image}
+                  alt="Instagram Logo"
+                  class="w-7 brightness-0 group-hover:brightness-100"
+                />
+              </a>
+            </li>
           ))
         }
       </ul>
