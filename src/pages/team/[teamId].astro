@@ -1,7 +1,8 @@
 ---
+import Container from "@components/Container.astro";
 import TeamsSelectorCards from "@components/TeamsSelectorCards.astro";
 import Layout from "@layouts/Layout.astro";
-import { getAllTeams } from "@services/getAllTeams";
+import { getAllTeams, backgroundColor } from "@services/getAllTeams";
 
 export async function getStaticPaths() {
   const teams = await getAllTeams();
@@ -12,8 +13,9 @@ export async function getStaticPaths() {
 }
 
 const {
+  id,
   name: teamName,
-  image,
+  imageReverse,
   presidentId,
   coachInfo: { name: coachName },
   channel,
@@ -22,21 +24,33 @@ const {
 ---
 
 <Layout title={teamName}>
-  <div class="container mx-auto py-6">
-    <section>
-      <div>
-        <img src={image} alt="" class="w-12" />
-        {teamName}
-      </div>
-      <a href={channel}> Redes</a>
-    </section>
-    <section>
-      <ul>
-        <li><b>Presidente :</b> {presidentId}</li>
-        <li><b>Entrenador :</b>{coachName}</li>
-        <li><b>Players :</b>{players.length}</li>
-      </ul>
-    </section>
-    <TeamsSelectorCards />
-  </div>
+  <section class={`${backgroundColor[id]} text-white relative h-96`}>
+    <figure
+      class={`absolute inset-0 z-10 bg-[size:90%] bg-center bg-no-repeat opacity-10 `}
+      style={`background-image: url(${imageReverse})`}
+    >
+    </figure>
+    <Container>
+      <section class="flex items-center justify-around">
+        <div class="flex items-center gap-6">
+          <img src={imageReverse} alt="" class="w-12" />
+          {teamName}
+        </div>
+        <a href={channel}> Redes</a>
+      </section>
+      <section>
+        <ul>
+          <li><b>Presidente :</b> {presidentId}</li>
+          <li><b>Entrenador :</b>{coachName}</li>
+          <li><b>Players :</b>{players.length}</li>
+        </ul>
+      </section>
+      <section>
+        <ul>
+          {players.map(({ fullName }) => <li>{fullName}</li>)}
+        </ul>
+      </section>
+    </Container>
+  </section>
+  <TeamsSelectorCards />
 </Layout>
