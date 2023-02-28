@@ -1,8 +1,10 @@
 ---
 import Container from "@components/Container.astro";
+
 import TeamsSelectorCards from "@components/TeamsSelectorCards.astro";
 import Layout from "@layouts/Layout.astro";
 import { getAllTeams, backgroundColor } from "@services/getAllTeams";
+import { findPresidentById } from "@services/presidents";
 
 export async function getStaticPaths() {
   const teams = await getAllTeams();
@@ -12,70 +14,109 @@ export async function getStaticPaths() {
   }));
 }
 
+const imagesSocialMaping = [
+  "instagram",
+  "tiktok",
+  "twitch",
+  "twitter",
+  "youtube",
+];
+
 const {
   id,
   name: teamName,
   imageReverse,
   presidentId,
+  socialNetworks,
   coachInfo: { name: coachName },
   channel,
   players,
 } = Astro.props;
+
+const { name, image } = await findPresidentById({ id: presidentId });
+const socialMedia = socialNetworks.map((url: string) => ({
+  url,
+  icon: imagesSocialMaping.find((href) => url.includes(href)),
+}));
 ---
 
 <Layout title={teamName}>
-  <section class={`${backgroundColor[id]} relative z-10 p-20`}>
-    <figure
-      class={`absolute inset-0 -z-10 bg-[size:80%] bg-center bg-no-repeat opacity-10 `}
-      style={`background-image: url(${imageReverse})`}
-    >
-    </figure>
+  <section class={`bg-[#e8521e] py-10 `}>
     <Container>
-      <section class="flex items-center justify-between">
-        <div class="flex items-center gap-x-10">
-          <img src={imageReverse} alt="" class="h-36" />
-          <h1 class="font-title text-6xl text-white">{teamName}</h1>
-        </div>
-        <a href={channel}> Redes</a>
-      </section>
-      <section class="my-20">
-        <ul>
-          <li><b>Presidente :</b> {presidentId}</li>
-          <li><b>Entrenador :</b>{coachName}</li>
-        </ul>
-      </section>
-      <section>
-        <h2 class="my-10 text-center font-title text-3xl text-white">
-          Jugadores
-        </h2>
-        <div
-          class="grid gap-4 font-body sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      <div class={`${backgroundColor[id]} relative z-10 p-10 rounded-lg`}>
+        <figure
+          class={`absolute inset-0 -z-10 bg-[size:80%] bg-center bg-no-repeat opacity-10 `}
+          style={`background-image: url(${imageReverse})`}
         >
-          {
-            players.map(({ fullName, role, image }) => (
-              <article class="font-title p-5 text-center">
-                <img
-                  src={`https://kings-league-api.bryan-armando.workers.dev/static/players/${image}`}
-                  alt={`Jugador ${fullName}`}
-                  class="aspect[170/240] mx-auto w-40"
-                  title={fullName}
-                />
-                <h3 class="font-title text-xl text-white ">{fullName}</h3>
-                <h4 class="font-body inline-block rounded-full bg-black px-4 py-1 font-semibold uppercase text-orange-300">
-                  {role}
-                </h4>
-              </article>
-            ))
-          }
-        </div>
-      </section>
+        </figure>
+        <section class="flex items-center justify-between">
+          <div class="flex flex-col items-center gap-y-4 gap-x-10 lg:flex-row">
+            <img src={imageReverse} alt="" class="h-32" />
+            <div class="grid gap-4">
+              <h1
+                class="text-center font-title text-2xl text-white md:text-4xl"
+              >
+                {teamName}
+              </h1>
+              <ul class="flex gap-3">
+                {
+                  socialMedia.map(({ url, icon }) => (
+                    <li class="transition hover:scale-125">
+                      <a href={url} target="_blank">
+                        <img
+                          src={`/logos/social/${icon}.svg`}
+                          alt=""
+                          class="h-6 w-6 brightness-0 invert hover:invert-0"
+                        />
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+          <div class="absolute -top-14 right-10">
+            <img
+              src={image}
+              alt={`Jugador ${name}`}
+              class="aspect[170/240] w-52"
+              title={name}
+            />
+            <h2 class="text-center font-title text-3xl text-white">{name}</h2>
+          </div>
+        </section>
+
+        <section class="mt-24">
+          <h2 class="text-center font-title text-3xl text-white">Jugadores</h2>
+          <div
+            class="grid grid-cols-2 gap-4 font-body md:grid-cols-3 lg:grid-cols-4"
+          >
+            {
+              players.map(({ fullName, role, image }) => (
+                <article class="font-title p-5 text-center">
+                  <img
+                    src={`https://kings-league-api.bryan-armando.workers.dev/static/players/${image}`}
+                    alt={`Jugador ${fullName}`}
+                    class="aspect[170/240] mx-auto w-40"
+                    title={fullName}
+                  />
+                  <h3 class="font-title text-xl text-white ">{fullName}</h3>
+                  <h4 class="font-body inline-block rounded-full bg-black px-4 py-1 font-semibold uppercase text-orange-300">
+                    {role}
+                  </h4>
+                </article>
+              ))
+            }
+          </div>
+        </section>
+      </div>
     </Container>
   </section>
 
   <section>
     <Container>
       <h1 class="my-6 text-center font-title text-3xl">Equipos</h1>
-      <TeamsSelectorCards />
+      <!-- <TeamsSelectorCards /> -->
     </Container>
   </section>
 </Layout>
