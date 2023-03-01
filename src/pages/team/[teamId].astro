@@ -2,6 +2,7 @@
 import Container from "@components/Container.astro";
 
 import TeamsSelectorCards from "@components/TeamsSelectorCards.astro";
+import TeamsStats from "@components/TeamsStats.astro";
 import Layout from "@layouts/Layout.astro";
 import { getAllTeams, backgroundColor } from "@services/getAllTeams";
 import { findPresidentById } from "@services/presidents";
@@ -28,8 +29,6 @@ const {
   imageReverse,
   presidentId,
   socialNetworks,
-  coachInfo: { name: coachName },
-  channel,
   players,
 } = Astro.props;
 
@@ -43,43 +42,46 @@ const socialMedia = socialNetworks.map((url: string) => ({
 <Layout title={teamName}>
   <section class={`bg-[#e8521e] py-10 `}>
     <Container>
-      <div class={`${backgroundColor[id]} relative z-10 p-10 rounded-lg`}>
+      <div class={`${backgroundColor[id]} relative z-10 p-8 rounded-lg`}>
         <figure
           class={`absolute inset-0 -z-10 bg-[size:80%] bg-center bg-no-repeat opacity-10 `}
           style={`background-image: url(${imageReverse})`}
         >
         </figure>
-        <section class="flex items-center justify-between">
-          <div class="flex flex-col items-center gap-y-4 gap-x-10 lg:flex-row">
-            <img src={imageReverse} alt="" class="h-32" />
-            <div class="grid gap-4">
-              <h1
-                class="text-center font-title text-2xl text-white md:text-4xl"
-              >
-                {teamName}
-              </h1>
-              <ul class="flex gap-3">
-                {
-                  socialMedia.map(({ url, icon }) => (
-                    <li class="transition hover:scale-125">
-                      <a href={url} target="_blank">
-                        <img
-                          src={`/logos/social/${icon}.svg`}
-                          alt=""
-                          class="h-6 w-6 brightness-0 invert hover:invert-0"
-                        />
-                      </a>
-                    </li>
-                  ))
-                }
-              </ul>
+        <section class="flex">
+          <div class="flex flex-col gap-y-10">
+            <div class="flex items-center gap-x-8">
+              <img src={imageReverse} alt="" class="h-40" />
+              <div class="grid gap-y-3">
+                <h1 class="font-title text-2xl text-white md:text-4xl">
+                  {teamName}
+                </h1>
+                <ul class="flex gap-3">
+                  {
+                    socialMedia.map(({ url, icon }) => (
+                      <li class="transition hover:scale-125">
+                        <a href={url} target="_blank">
+                          <img
+                            src={`/logos/social/${icon}.svg`}
+                            alt=""
+                            class="h-6 w-6 brightness-0 invert hover:invert-0"
+                          />
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
             </div>
+
+            <TeamsStats statsId={id} />
           </div>
-          <div class="absolute -top-14 right-10">
+
+          <div class="absolute top-14 right-10 lg:-top-14">
             <img
               src={image}
               alt={`Jugador ${name}`}
-              class="aspect[170/240] w-52"
+              class="aspect[170/240] w-60"
               title={name}
             />
             <h2 class="text-center font-title text-3xl text-white">{name}</h2>
