@@ -1,0 +1,52 @@
+---
+import { getTeamStastById } from "@services/leaderboard";
+
+const { statsId } = Astro.props;
+
+const { rank, wins, loses, goalsScored, goalsConceded, cardsYellow, cardsRed } =
+  await getTeamStastById({ teamId: statsId });
+
+const statsTeam = [
+  {
+    title: "Clasificación",
+    data: rank,
+  },
+  {
+    title: "Victorias",
+    data: wins,
+  },
+  {
+    title: "Derrotas",
+    data: loses,
+  },
+  {
+    title: "GF",
+    data: goalsScored,
+  },
+  {
+    title: "GC",
+    data: goalsConceded,
+  },
+  {
+    title: "T. Amarillas",
+    data: cardsYellow,
+  },
+  {
+    title: "T. Rojas",
+    data: cardsRed,
+  },
+];
+---
+
+<section
+  class="grid grid-cols-2 gap-x-5 rounded-lg bg-black p-4 font-title lg:grid-cols-4"
+>
+  {
+    statsTeam.map(({ title, data }) => (
+      <div class="flex flex-col ">
+        <h3 class="uppercase text-yellow-400">{title}</h3>
+        <strong class="text-2xl text-white">{data}</strong>
+      </div>
+    ))
+  }
+</section>
