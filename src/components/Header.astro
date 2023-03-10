@@ -38,7 +38,7 @@ const teams = await getAllTeams();
 ---
 
 <header class="flex flex-col gap-2 bg-[#e8521e] p-4">
-  <nav class="relative">
+  <nav class="relative hidden md:block">
     <ul
       class="flex flex-wrap items-center justify-center gap-3 rounded-full px-4 py-2"
     >
@@ -73,17 +73,28 @@ const teams = await getAllTeams();
     >
     </div>
   </nav>
-  <nav>
+  <div class="flex items-center justify-between md:hidden">
+    <Logo />
+    <button class="block h-12" id="togglemenu">
+      <img
+        src="/logos/hamburger.svg"
+        alt="Kings-league infojobs logo"
+        class="h-full transition"
+      />
+    </button>
+  </div>
+  <nav class="">
     <ul
-      class="flex justify-center gap-6 text-sm text-white [&>li>a:hover]:underline [&>li>a:hover]:opacity-100 [&>li>a]:opacity-80"
+      id="menu"
+      class="fixed inset-x-0 z-20 flex h-[calc(100%-118.22px)] flex-col items-center gap-y-6 bg-white p-8 text-sm text-black transition-all duration-1000 md:static md:flex-row md:justify-center md:gap-6 md:gap-y-0 md:bg-inherit md:p-0 md:font-normal md:text-white md:transition-none [&>li>a:hover]:opacity-100 [&>li>a]:opacity-80"
     >
       {
         routes.map(({ name, url }) => (
           <li>
             <a
               href={url}
-              class={`${
-                Astro.url.pathname === url && "pointer-events-none underline"
+              class={`hover:text-[#e8521e] md:hover:text-black ${
+                Astro.url.pathname === url && "pointer-events-none  underline"
               } `}
             >
               {name}
@@ -94,3 +105,26 @@ const teams = await getAllTeams();
     </ul>
   </nav>
 </header>
+
+<script>
+  const toogleMenuEl = document.getElementById("togglemenu");
+  const imageButton = toogleMenuEl.querySelector("img");
+  console.log(imageButton.src);
+  const menuEl = document.getElementById("menu");
+  menuEl.classList.add("-bottom-full");
+
+  toogleMenuEl.addEventListener("click", openMenu);
+  function openMenu() {
+    if (menuEl.classList.contains("-bottom-full")) {
+      menuEl.classList.add("bottom-0");
+      // document.body.classList.add("overflow-y-hidden");
+      menuEl.classList.remove("-bottom-full");
+      imageButton.src = "/logos/close.svg";
+    } else {
+      menuEl.classList.add("-bottom-full");
+      menuEl.classList.remove("bottom-0");
+      document.body.classList.remove("overflow-y-hidden");
+      imageButton.src = "/logos/hamburger.svg";
+    }
+  }
+</script>

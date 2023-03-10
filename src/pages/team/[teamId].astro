@@ -48,8 +48,8 @@ const socialMedia = socialNetworks.map((url: string) => ({
           style={`background-image: url(${imageReverse})`}
         >
         </figure>
-        <section class="flex">
-          <div class="flex flex-col gap-y-10">
+        <section class="flex flex-col md:flex-row">
+          <div class="flex flex-col items-center gap-y-10">
             <div class="flex items-center gap-x-8">
               <img src={imageReverse} alt="" class="h-40" />
               <div class="grid gap-y-3">
@@ -77,18 +77,25 @@ const socialMedia = socialNetworks.map((url: string) => ({
             <TeamsStats statsId={id} />
           </div>
 
-          <div class="absolute top-14 right-10 lg:-top-14">
+          <div
+            class="top-14 right-10 grid place-content-center md:absolute lg:-top-14"
+          >
             <img
               src={image}
               alt={`Jugador ${name}`}
-              class="aspect[170/240] w-60"
+              class="aspect[170/240] w-56 lg:w-80"
               title={name}
             />
             <h2 class="text-center font-title text-3xl text-white">{name}</h2>
+            <h2
+              class="rounded-full bg-black/80 text-center font-title text-xl text-[#e8521e]"
+            >
+              Presidente
+            </h2>
           </div>
         </section>
 
-        <section class="mt-24">
+        <section class="mt-16">
           <h2 class="text-center font-title text-3xl text-white">Jugadores</h2>
           <div
             class="grid grid-cols-2 gap-4 font-body md:grid-cols-3 lg:grid-cols-4"
@@ -118,7 +125,7 @@ const socialMedia = socialNetworks.map((url: string) => ({
   <section>
     <Container>
       <h1 class="my-6 text-center font-title text-3xl">Equipos</h1>
-      <!-- <TeamsSelectorCards /> -->
+      <TeamsSelectorCards />
     </Container>
   </section>
 </Layout>
