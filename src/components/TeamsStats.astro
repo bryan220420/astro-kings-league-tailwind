@@ -8,7 +8,7 @@ const { rank, wins, loses, goalsScored, goalsConceded, cardsYellow, cardsRed } =
 
 const statsTeam = [
   {
-    title: "Clasificación",
+    title: "Posición",
     data: rank,
   },
   {
@@ -28,19 +28,17 @@ const statsTeam = [
     data: goalsConceded,
   },
   {
-    title: "T. Amarillas",
+    title: "Amarillas",
     data: cardsYellow,
   },
   {
-    title: "T. Rojas",
+    title: "Rojas",
     data: cardsRed,
   },
 ];
 ---
 
-<section
-  class="grid grid-cols-2 gap-x-5 rounded-lg bg-black p-4 font-title lg:grid-cols-4"
->
+<section class="grid grid-cols-3 gap-5 rounded-lg bg-black p-4 font-title">
   {
     statsTeam.map(({ title, data }) => (
       <div class="flex flex-col ">
