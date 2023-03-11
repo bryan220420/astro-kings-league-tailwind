@@ -1,0 +1,38 @@
+---
+import { backgroundColor } from "@services/getAllTeams";
+
+const { statistic, data, amount, reverse = false } = Astro.props;
+const { playerName, playerImage, imageReverse, team, teamId } = data;
+---
+
+<a href="">
+  <article
+    class={`font-title relative rounded-lg p-4 text-white ${
+      backgroundColor[teamId]
+    } flex justify-between ${reverse && "flex-row-reverse text-right "}`}
+  >
+    <figure
+      class={`absolute inset-0 z-10 bg-[size:80%] bg-center bg-no-repeat opacity-10 `}
+      style={`background-image: url(${imageReverse})`}
+    >
+    </figure>
+    <div class="flex flex-col gap-y-10">
+      <div class="">
+        <h1 class="text-7xl">{amount}</h1>
+        <h3 class="text-2xl text-[#e8521e]">{statistic}</h3>
+      </div>
+      <div>
+        <p>{playerName}</p>
+        <h3 class="font-body">{team}</h3>
+      </div>
+    </div>
+    <figure class={`absolute bottom-0 ${reverse ? "left-5" : "right-5"} `}>
+      <img
+        src={`https://kings-league-api.bryan-armando.workers.dev/static/players/${playerImage}`}
+        alt={`Jugador ${playerName}`}
+        class="aspect[170/240] w-44"
+        title={playerName}
+      />
+    </figure>
+  </article>
+</a>

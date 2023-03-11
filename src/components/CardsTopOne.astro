@@ -1,3 +1,15 @@
 ---
-const { TopOnes } = Astro.props;
+import { getTopOnePlayers } from "@services/statistics";
+import CardMain from "./CardMain.astro";
+
+const { mvp, topScorers, topAssist } = await getTopOnePlayers();
+const { mvps, ...restOfMvp } = mvp;
+const { goals, ...restOfScorers } = topScorers;
+const { assists, ...restOfAssists } = topAssist;
 ---
+
+<section class="grid gap-10">
+  <CardMain statistic="MVPS" amount={mvps} data={restOfMvp} />
+  <CardMain statistic="Goles" amount={goals} data={restOfScorers} reverse />
+  <CardMain statistic="Asistencias" amount={assists} data={restOfAssists} />
+</section>
