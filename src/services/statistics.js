@@ -18,7 +18,7 @@ export async function getTopOnePlayers() {
     } = await fetch(
       "https://kings-league-api.bryan-armando.workers.dev/top-statistics"
     ).then((res) => res.json());
-    return [topMvp, topScorer, topAssist];
+    return { mvp: topMvp, topScorers: topScorer, topAssist: topAssist };
   } catch (error) {
     console.log(error);
     return null;
