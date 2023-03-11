@@ -1,0 +1,51 @@
+---
+import Container from "@components/Container.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+import Layout from "@layouts/Layout.astro";
+import { getTopOnePlayers } from "@services/statistics";
+const routes = [
+  {
+    url: "/estadisticas/mvp",
+    name: "simyo MVP",
+  },
+  {
+    url: "/estadisticas/topScorers",
+    name: "Goles",
+  },
+  {
+    url: "/estadisticas/topAssists",
+    name: "Asistencias",
+  },
+];
+
+const topPlayes = await getTopOnePlayers();
+---
+
+<Layout>
+  <section>
+    <SectionTitle title="Estadísticas" />
+    <Container>
+      <section class="flex">
+        <!-- menu -->
+        <nav class="grid gap-4">
+          {
+            routes.map(({ url, name }) => (
+              <a
+                href={url}
+                class={` ${
+                  Astro.url.pathname === url && "pointer-events-none  bg-black"
+                } font-title rounded-md bg-black/20 p-2 text-white hover:bg-black`}
+              >
+                {name}
+              </a>
+            ))
+          }
+        </nav>
+        <!-- tables -->
+        <div class="flex-grow bg-white p-4">
+          <slot />
+        </div>
+      </section>
+    </Container>
+  </section>
+</Layout>
