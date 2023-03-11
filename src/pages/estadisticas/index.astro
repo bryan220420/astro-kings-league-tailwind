@@ -1,10 +1,11 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import LayoutStatistics from "@layouts/LayoutStatistics.astro";
 import { getTopOnePlayers } from "@services/statistics";
 const topPlayes = await getTopOnePlayers();
-console.log(topPlayes);
 ---
 
-<Layout>
-  <h1>{JSON.stringify(topPlayes)}</h1>
-</Layout>
+<LayoutStatistics>
+  <section>
+    <h1>Top One :v</h1>
+  </section>
+</LayoutStatistics>
