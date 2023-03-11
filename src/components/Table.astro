@@ -16,10 +16,10 @@ const leaderboard = await getLeaderboard();
     </thead>
     <tbody>
       {
-        leaderboard.map(({ wins, loses, team: { image, name, id } }, i) => (
+        leaderboard.map(({ rank, wins, loses, team: { image, name, id } }) => (
           <tr class="border-b bg-white text-sm">
             <th scope="row" class="font-title whitespace-nowrap px-4  py-1">
-              {i + 1}
+              {rank}
             </th>
             <td class="px-4  py-1">
               <a
