@@ -10,7 +10,7 @@ const leaderboard = await getLeaderboard();
 
 <Layout title="Home">
   <main>
-    <section class="bg-[#e8521e] py-5 md:py-10">
+    <section class="bg-[#e8521e#e8521e] py-5 md:py-10">
       <Container>
         <!-- schedule - leaderboard -->
         <div
@@ -21,7 +21,7 @@ const leaderboard = await getLeaderboard();
               {
                 leaderboard.map(
                   ({ rank, wins, loses, team: { image, name, id } }) => (
-                    <tr class="border-b bg-white text-[10px]">
+                    <tr class="border-b bg-white  text-[10px]">
                       <th
                         scope="row"
                         class="font-title whitespace-nowrap px-4  py-1"

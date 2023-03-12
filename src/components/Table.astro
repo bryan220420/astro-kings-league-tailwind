@@ -4,11 +4,11 @@ const { header, large = false, circle = false } = Astro.props;
 
 <div class={`relative overflow-x-auto ${circle && "rounded-lg"}  shadow-md`}>
   <table class={`w-full text-left ${large ? "text-lg" : "text-xs"} text-black`}>
-    <thead class="bg-black font-title uppercase text-white">
+    <thead class="bg-black uppercase text-white">
       <tr>
         {
           header.map((col: string) => (
-            <th scope="col" class="px-4 py-1">
+            <th scope="col" class="px-2 py-1 text-center">
               {col}
             </th>
           ))

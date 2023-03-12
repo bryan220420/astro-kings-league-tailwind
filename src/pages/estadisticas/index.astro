@@ -6,13 +6,15 @@ const topPlayes = await getTopsPlayers();
 ---
 
 <LayoutStatistics>
-  <section class="grid grid-cols-1 gap-6 py-5 md:grid-cols-2 xl:grid-cols-3">
+  <section
+    class="grid gap-6 py-5 md:grid-cols-2 xl:grid-cols-3 md:[&>section:nth-child(3)]:col-span-2 xl:[&>section:nth-child(3)]:col-span-1"
+  >
     {
-      Object.entries(topPlayes).map(([key, dataArray]) => (
+      Object.entries(typeStatistics).map(([key, { title, keyAmount }]) => (
         <CardSecundary
-          statistic={typeStatistics[key].title}
-          keyAmount={typeStatistics[key].keyAmount}
-          data={dataArray}
+          statistic={title}
+          keyAmount={keyAmount}
+          data={topPlayes[key]}
         />
       ))
     }

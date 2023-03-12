@@ -1,8 +1,49 @@
 ---
+import Container from "@components/Container.astro";
 import SectionTitle from "@components/SectionTitle.astro";
+import Table from "@components/Table.astro";
 import Layout from "@layouts/Layout.astro";
+import { getLeaderboard } from "@services/leaderboard";
+const leaderboard = await getLeaderboard();
 ---
 
 <Layout title="Contact us">
   <SectionTitle title="Clasificatoria" />
+  <Container>
+    <section class="mx-auto my-6 max-w-4xl">
+      <Table header={["POS", "EQUIPO", "PG", "PP", "GF", "GC", "DG"]} circle>
+        {
+          leaderboard.map(
+            ({
+              rank,
+              wins,
+              loses,
+              team: { image, name, id },
+              goalsScored,
+              goalsConceded,
+            }) => (
+              <tr class="border-b bg-white  text-center ">
+                <th scope="row" class="font-title whitespace-nowrap px-4  py-1">
+                  {rank}
+                </th>
+                <td class="px-4  py-1">
+                  <a
+                    href={`/team/${id}`}
+                    class="flex items-center gap-4 text-left transition hover:text-[#e8521e]"
+                  >
+                    <img src={image} alt={name} class="h-10 w-10" /> {name}
+                  </a>
+                </td>
+                <td class="px-4  py-1"> {wins}</td>
+                <td class="px-4  py-1"> {loses}</td>
+                <td class="px-4  py-1"> {goalsScored}</td>
+                <td class="px-4  py-1"> {goalsConceded}</td>
+                <td class="px-4  py-1"> {goalsScored - goalsConceded}</td>
+              </tr>
+            )
+          )
+        }
+      </Table>
+    </section>
+  </Container>
 </Layout>

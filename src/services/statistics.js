@@ -40,3 +40,6 @@ export const typeStatistics = {
     endpoint: "top-assists",
   },
 };
+
+export const convertHeader = (header) =>
+  header.length > 6 ? `${header.substring(0, 4)}.` : header;

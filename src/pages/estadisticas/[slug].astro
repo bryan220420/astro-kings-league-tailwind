@@ -1,25 +1,50 @@
 ---
+import SectionTitle from "@components/SectionTitle.astro";
+import Table from "@components/Table.astro";
 import LayoutStatistics from "@layouts/LayoutStatistics.astro";
-import { typeStatistics } from "@services/statistics";
+import { convertHeader, typeStatistics } from "@services/statistics";
 
 export async function getStaticPaths() {
   return Promise.all(
-    Object.values(typeStatistics).map(async ({ slug, endpoint }) => {
-      const topPlayers = await fetch(
-        `https://kings-league-api.bryan-armando.workers.dev/${endpoint}`
-      ).then((res) => res.json());
-      return { params: { slug: slug }, props: { topPlayers } };
-    })
+    Object.values(typeStatistics).map(
+      async ({ slug, endpoint, title, keyAmount }) => {
+        const topPlayers = await fetch(
+          `https://kings-league-api.bryan-armando.workers.dev/${endpoint}`
+        ).then((res) => res.json());
+        return {
+          params: { slug: slug },
+          props: { title, topPlayers, keyAmount },
+        };
+      }
+    )
   );
 }
 
-const { topPlayers } = Astro.props;
+const { title, topPlayers, keyAmount } = Astro.props;
 ---
 
 <LayoutStatistics>
-  <section>
-    <p>
-      {JSON.stringify(topPlayers)}
-    </p>
-  </section>
+  <h1 class="my-4 font-title text-4xl text-black">{title}</h1>
+  <Table
+    header={["RANK", "EQUIPO", "NOMBRE", "PARTIDOS", convertHeader(title)]}
+  >
+    {
+      topPlayers.map((data) => {
+        const { rank, image, team, gamesPlayed, playerName } = data;
+        return (
+          <tr class="border-b bg-white text-center ">
+            <th scope="row" class="font-title whitespace-nowrap py-1">
+              {rank}
+            </th>
+            <td class="flex  items-center gap-4 px-4 py-1 text-left">
+              <img src={image} alt={team} class="h-10 w-10" /> {team}
+            </td>
+            <td class="px-4  py-1"> {playerName}</td>
+            <td class="px-4  py-1"> {gamesPlayed}</td>
+            <td class="px-4  py-1"> {data[keyAmount]}</td>
+          </tr>
+        );
+      })
+    }
+  </Table>
 </LayoutStatistics>
