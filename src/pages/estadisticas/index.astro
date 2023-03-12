@@ -3,11 +3,10 @@ import CardSecundary from "@components/CardSecundary.astro";
 import LayoutStatistics from "@layouts/LayoutStatistics.astro";
 import { getTopsPlayers, typeStatistics } from "@services/statistics";
 const topPlayes = await getTopsPlayers();
-console.log(Object.values(typeStatistics));
 ---
 
 <LayoutStatistics>
-  <section class="grid grid-cols-3 gap-6 py-5">
+  <section class="grid grid-cols-1 gap-6 py-5 md:grid-cols-2 xl:grid-cols-3">
     {
       Object.entries(topPlayes).map(([key, dataArray]) => (
         <CardSecundary
