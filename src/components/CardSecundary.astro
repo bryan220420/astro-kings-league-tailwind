@@ -1,0 +1,45 @@
+---
+import { typeStatistics } from "@services/statistics";
+import CardMain from "./CardMain.astro";
+import Table from "./Table.astro";
+
+const { keyAmount, statistic, data } = Astro.props;
+const [firstObject, ...restOfMvp] = data;
+const { playerName, playerImage, imageReverse, team, teamId } = firstObject;
+const headerStatistic =
+  statistic.length > 5 ? `${statistic.substring(0, 4)}.` : statistic;
+---
+
+<section class="border">
+  <h1 class="py-3 pl-4 font-title">{statistic}</h1>
+  <CardMain
+    statistic={statistic}
+    data={{
+      amount: firstObject[keyAmount],
+      playerName,
+      playerImage,
+      imageReverse,
+      team,
+      teamId,
+    }}
+  />
+  <Table header={["RANK", "EQUIPO", "NOMBRE", headerStatistic]}>
+    {
+      restOfMvp.map((data) => {
+        const { rank, image, team } = data;
+        return (
+          <tr class="border-b bg-white text-center ">
+            <th scope="row" class="font-title whitespace-nowrap py-1">
+              {rank}
+            </th>
+            <td class="px-4  py-1">
+              <img src={image} alt={team} class="h-10 w-10" />
+            </td>
+            <td class="px-4  py-1"> {team}</td>
+            <td class="px-4  py-1"> {data[keyAmount]}</td>
+          </tr>
+        );
+      })
+    }
+  </Table>
+</section>

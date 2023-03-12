@@ -1,15 +1,31 @@
 ---
-import { getTopOnePlayers } from "@services/statistics";
+import { getTopOnePlayers, typeStatistics } from "@services/statistics";
 import CardMain from "./CardMain.astro";
 
-const { mvp, topScorers, topAssist } = await getTopOnePlayers();
-const { mvps } = mvp;
-const { goals } = topScorers;
-const { assists } = topAssist;
+const topOnesPlayers = await getTopOnePlayers();
 ---
 
 <section class="grid gap-10">
-  <CardMain statistic="MVP" amount={mvps} data={{ ...mvp }} />
-  <CardMain statistic="Goles" amount={goals} data={{ ...topScorers }} reverse />
-  <CardMain statistic="Asistencias" amount={assists} data={{ ...topAssist }} />
+  {
+    Object.entries(topOnesPlayers).map(([key, data], i) => {
+      const { playerName, playerImage, imageReverse, team, teamId } = data;
+      return (
+        <a href={`/estadisticas/${typeStatistics[key].slug}`}>
+          <CardMain
+            circle
+            statistic={typeStatistics[key].title}
+            reverse={i % 2 == 1}
+            data={{
+              amount: data[typeStatistics[key].keyAmount],
+              playerName,
+              playerImage,
+              imageReverse,
+              team,
+              teamId,
+            }}
+          />
+        </a>
+      );
+    })
+  }
 </section>

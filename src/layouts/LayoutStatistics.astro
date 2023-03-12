@@ -9,11 +9,11 @@ const routes = [
     name: "simyo MVP",
   },
   {
-    url: "/estadisticas/topScorers",
+    url: "/estadisticas/goles",
     name: "Goles",
   },
   {
-    url: "/estadisticas/topAssists",
+    url: "/estadisticas/asistencias",
     name: "Asistencias",
   },
 ];
@@ -27,7 +27,7 @@ const topPlayes = await getTopOnePlayers();
     <Container>
       <section class="flex flex-col lg:flex-row">
         <!-- menu -->
-        <nav class="mt-6 flex gap-4 lg:grid">
+        <nav class="mt-6 flex gap-4 lg:flex-col">
           {
             routes.map(({ url, name }) => (
               <a

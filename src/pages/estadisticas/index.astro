@@ -1,11 +1,21 @@
 ---
+import CardSecundary from "@components/CardSecundary.astro";
 import LayoutStatistics from "@layouts/LayoutStatistics.astro";
-import { getTopOnePlayers } from "@services/statistics";
-const topPlayes = await getTopOnePlayers();
+import { getTopsPlayers, typeStatistics } from "@services/statistics";
+const topPlayes = await getTopsPlayers();
+console.log(Object.values(typeStatistics));
 ---
 
 <LayoutStatistics>
-  <section>
-    <h1>Top One :v</h1>
+  <section class="grid grid-cols-3 gap-6 py-5">
+    {
+      Object.entries(topPlayes).map(([key, dataArray]) => (
+        <CardSecundary
+          statistic={typeStatistics[key].title}
+          keyAmount={typeStatistics[key].keyAmount}
+          data={dataArray}
+        />
+      ))
+    }
   </section>
 </LayoutStatistics>

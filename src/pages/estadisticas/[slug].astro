@@ -1,0 +1,25 @@
+---
+import LayoutStatistics from "@layouts/LayoutStatistics.astro";
+import { typeStatistics } from "@services/statistics";
+
+export async function getStaticPaths() {
+  return Promise.all(
+    Object.values(typeStatistics).map(async ({ slug, endpoint }) => {
+      const topPlayers = await fetch(
+        `https://kings-league-api.bryan-armando.workers.dev/${endpoint}`
+      ).then((res) => res.json());
+      return { params: { slug: slug }, props: { topPlayers } };
+    })
+  );
+}
+
+const { topPlayers } = Astro.props;
+---
+
+<LayoutStatistics>
+  <section>
+    <p>
+      {JSON.stringify(topPlayers)}
+    </p>
+  </section>
+</LayoutStatistics>

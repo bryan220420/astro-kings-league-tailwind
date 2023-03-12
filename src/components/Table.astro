@@ -1,39 +1,22 @@
 ---
-import { getLeaderboard } from "@services/leaderboard";
-
-const leaderboard = await getLeaderboard();
+const { header, large = false, circle = false } = Astro.props;
 ---
 
-<div class="relative overflow-x-auto rounded-lg shadow-md">
-  <table class="w-full text-left text-xs text-black">
+<div class={`relative overflow-x-auto ${circle && "rounded-lg"}  shadow-md`}>
+  <table class={`w-full text-left ${large ? "text-lg" : "text-xs"} text-black`}>
     <thead class="bg-black font-title uppercase text-white">
       <tr>
-        <th scope="col" class="px-4 py-1"> POS</th>
-        <th scope="col" class="px-4 py-1"> EQUIPO</th>
-        <th scope="col" class="px-4 py-1"> PG</th>
-        <th scope="col" class="px-4 py-1"> PP</th>
+        {
+          header.map((col: string) => (
+            <th scope="col" class="px-4 py-1">
+              {col}
+            </th>
+          ))
+        }
       </tr>
     </thead>
     <tbody>
-      {
-        leaderboard.map(({ rank, wins, loses, team: { image, name, id } }) => (
-          <tr class="border-b bg-white text-sm">
-            <th scope="row" class="font-title whitespace-nowrap px-4  py-1">
-              {rank}
-            </th>
-            <td class="px-4  py-1">
-              <a
-                href={`/team/${id}`}
-                class="flex items-center gap-4 transition hover:scale-105"
-              >
-                <img src={image} alt={name} class="h-10 w-10" /> {name}
-              </a>
-            </td>
-            <td class="px-4  py-1"> {wins}</td>
-            <td class="px-4  py-1"> {loses}</td>
-          </tr>
-        ))
-      }
+      <slot />
     </tbody>
   </table>
 </div>

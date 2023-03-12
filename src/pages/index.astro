@@ -3,6 +3,9 @@ import CardsTopOne from "@components/CardsTopOne.astro";
 import Container from "@components/Container.astro";
 import Table from "@components/Table.astro";
 import Layout from "@layouts/Layout.astro";
+
+import { getLeaderboard } from "@services/leaderboard";
+const leaderboard = await getLeaderboard();
 ---
 
 <Layout title="Home">
@@ -14,7 +17,33 @@ import Layout from "@layouts/Layout.astro";
           class="grid w-full items-center gap-6 px-5 sm:grid-cols-2 lg:grid-cols-3"
         >
           <div>
-            <Table />
+            <Table header={["POS", "EQUIPO", "PG", "PP"]} circle>
+              {
+                leaderboard.map(
+                  ({ rank, wins, loses, team: { image, name, id } }) => (
+                    <tr class="border-b bg-white text-[10px]">
+                      <th
+                        scope="row"
+                        class="font-title whitespace-nowrap px-4  py-1"
+                      >
+                        {rank}
+                      </th>
+                      <td class="px-4  py-1">
+                        <a
+                          href={`/team/${id}`}
+                          class="flex items-center gap-4 transition hover:scale-105"
+                        >
+                          <img src={image} alt={name} class="h-10 w-10" />{" "}
+                          {name}
+                        </a>
+                      </td>
+                      <td class="px-4  py-1"> {wins}</td>
+                      <td class="px-4  py-1"> {loses}</td>
+                    </tr>
+                  )
+                )
+              }
+            </Table>
           </div>
 
           <div class="lg:col-span-2">
