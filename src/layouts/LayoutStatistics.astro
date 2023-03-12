@@ -22,19 +22,21 @@ const topPlayes = await getTopOnePlayers();
 ---
 
 <Layout>
-  <section>
-    <SectionTitle title="Estadísticas" />
+  <SectionTitle title="Estadísticas" />
+  <section class="bg-[#e8521e]">
     <Container>
-      <section class="flex">
+      <section class="flex flex-col lg:flex-row">
         <!-- menu -->
-        <nav class="grid gap-4">
+        <nav class="mt-6 flex gap-4 lg:grid">
           {
             routes.map(({ url, name }) => (
               <a
                 href={url}
                 class={` ${
-                  Astro.url.pathname === url && "pointer-events-none  bg-black"
-                } font-title rounded-md bg-black/20 p-2 text-white hover:bg-black`}
+                  Astro.url.pathname === url
+                    ? "pointer-events-none bg-black "
+                    : "bg-black/20"
+                } font-title rounded-md  p-2 pr-14 text-white hover:bg-black`}
               >
                 {name}
               </a>
