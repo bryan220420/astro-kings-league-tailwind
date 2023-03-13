@@ -17,11 +17,11 @@ const routes = [
     name: "Asistencias",
   },
 ];
-
+const { title } = Astro.props;
 const topPlayes = await getTopOnePlayers();
 ---
 
-<Layout>
+<Layout title={title}>
   <SectionTitle title="Estadísticas" />
   <section class="bg-[#e8521e]">
     <Container>
