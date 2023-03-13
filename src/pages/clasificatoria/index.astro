@@ -23,13 +23,19 @@ const leaderboard = await getLeaderboard();
               goalsConceded,
             }) => (
               <tr class="border-b bg-white  text-center ">
-                <th scope="row" class="font-title whitespace-nowrap px-4  py-1">
+                <th
+                  scope="row"
+                  class=" font-title relative whitespace-nowrap px-4  py-1"
+                >
                   {rank}
+                  {rank < 9 && (
+                    <span class="bg-primary absolute left-0 top-0 h-full w-1" />
+                  )}
                 </th>
                 <td class="px-4  py-1">
                   <a
                     href={`/team/${id}`}
-                    class="flex items-center gap-4 text-left transition hover:text-[#e8521e]"
+                    class="hover:text-primary flex items-center gap-4 text-left transition"
                   >
                     <img src={image} alt={name} class="h-10 w-10" /> {name}
                   </a>

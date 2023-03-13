@@ -7,6 +7,9 @@ module.exports = {
         body: ["Archivo", "system-ui"],
         title: ["Archivo Black", "sans-serif"],
       },
+      colors: {
+        primary: "#e8521e",
+      },
       backgroundImage: {
         "aniquiladores-fc":
           "linear-gradient(90deg, rgb(130, 31, 52) 0%, 12.9447%, rgb(153, 30, 56) 25.8893%, 62.9447%, rgb(243, 89, 117) 100%)",
