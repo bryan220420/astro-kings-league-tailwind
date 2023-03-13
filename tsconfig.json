@@ -1,14 +1,26 @@
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    // "forceConsistentCasingInFileNames": false,
     "baseUrl": ".",
+    "forceConsistentCasingInFileNames": false,
     "paths": {
-      "@components/*" : ["src/components/*"],
-      "@layouts/*" : ["src/layouts/*"],
-      "@types/*" : ["src/types/*"],
-      "@services/*" : ["src/services/*"],
-      "@images/*" : ["/*"],
-    }
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@types/*": [
+        "src/types/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@images/*": [
+        "/*"
+      ]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }
