@@ -1,8 +1,18 @@
 ---
+import Container from "@components/Container.astro";
+import PlayersTwelve from "@components/PlayersTwelve";
+import Prueba from "@components/Prueba";
 import SectionTitle from "@components/SectionTitle.astro";
 import Layout from "@layouts/Layout.astro";
+
+// https://kings-league-api.bryan-armando.workers.dev/teams/saiyans-fc/players-12
 ---
 
-<Layout title="Calendario">
+<Layout title="Jugador 12">
   <SectionTitle title="Jugadores 12" />
+  <Container>
+    <h2>POR HACER :v</h2>
+    <!-- <PlayersTwelve client:load /> -->
+    <Prueba />
+  </Container>
 </Layout>
