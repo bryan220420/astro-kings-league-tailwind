@@ -3,11 +3,14 @@ import Container from "@components/Container.astro";
 import { PlayersTwelve } from "@components/PlayersTwelve.jsx";
 import SectionTitle from "@components/SectionTitle.astro";
 import Layout from "@layouts/Layout.astro";
+import { backgroundColor } from "@services/getAllTeams";
 ---
 
 <Layout title="Jugador 12">
   <SectionTitle title="Jugadores 12" />
   <Container>
-    <PlayersTwelve client:load />
+    <section class="p-6">
+      <PlayersTwelve backgroundColor={backgroundColor} client:load />
+    </section>
   </Container>
 </Layout>
