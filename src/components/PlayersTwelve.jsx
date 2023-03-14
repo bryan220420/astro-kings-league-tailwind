@@ -61,28 +61,29 @@ export const PlayersTwelve = ({ backgroundColor }) => {
               </svg>
             </span>
           </button>
-          {openDrow && (
-            <ul
-              className={` absolute top-full mt-3  w-auto overflow-hidden  rounded-lg text-sm  text-white  ${
-                teamName
-                  ? "bg-gray-800 ring-1 ring-gray-800 "
-                  : "bg-gray-600  focus:ring-1 focus:ring-gray-800"
-              } `}
-            >
-              {teamList.map(({ id, name }) => (
-                <button
-                  key={id}
-                  className="w-full whitespace-nowrap px-4 py-1 text-left hover:bg-black/25"
-                  onClick={() => {
-                    setTeamName(id);
-                    setOpenDrow(false);
-                  }}
-                >
-                  {name}
-                </button>
-              ))}
-            </ul>
-          )}
+
+          <ul
+            className={`transition[max-height] absolute top-full z-20  mt-3 duration-500 ${
+              openDrow ? "max-h-96" : "max-h-0"
+            } w-auto overflow-hidden  rounded-lg text-sm  text-white  ${
+              teamName
+                ? "bg-gray-800 "
+                : "bg-gray-600  focus:ring-1 focus:ring-gray-800"
+            } `}
+          >
+            {teamList.map(({ id, name }) => (
+              <button
+                key={id}
+                className="w-full whitespace-nowrap px-4 py-1 text-left hover:bg-black/25"
+                onClick={() => {
+                  setTeamName(id);
+                  setOpenDrow(false);
+                }}
+              >
+                {name}
+              </button>
+            ))}
+          </ul>
         </div>
       </div>
       <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
